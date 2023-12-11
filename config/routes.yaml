@@ -1,3 +1,7 @@
 controllers:
     resource: ../src/Controller/
     type: attribute
+
+cabinet_inscription:
+    path: 'inscription'
+    controller: 'App\Controller\CabinetInscriptionController::index'

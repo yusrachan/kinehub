@@ -1,0 +1,13 @@
+{# templates/cabinet_inscription/index.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription de votre cabinet!{% endblock %}
+
+{% block body %}
+    <h1>Inscription de votre cabinet</h1>
+
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        {{ form_end(form) }}
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <header>
+		<h1>KineHub</h1>
+        <p>Facilitez la gestion des dossiers médicaux de vos patients de manière intuitive et sécurisée.</p>
+    </header>
+    <section class="features">
+        <div class="feature">
+            <h2>Gestion simplifiée</h2>
+            <p>Centralisez les informations des patients, suivez vos séances de kinésithérapie et assurez une gestion efficace des dossiers médicaux.</p>
+        </div>
+        <div class="feature">
+            <h2>Sécurité des données</h2>
+            <p>La sécurité est notre priorité. Les dossiers de vos patients sont stockés de manière sécurisée et conformément aux normes de confidentialité.</p>
+        </div>
+        <div class="feature">
+            <h2>Gestion simplifiée</h2>
+            <p>Permettez aux kinésithérapeutes de collaborer en partageant des informations essentielles sur les patients.</p>
+        </div>
+	</section>
+
+    <section class="inscription">
+        <p>Vous souhaitez utiliser notre plateforme ?</p>
+        <a href="{{ path('cabinet_inscription') }}" class="btn">Inscrivez votre cabinet sur KineHub dès maintenant !</a>
+    </section>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section contact">
+                <h3>Contact</h3>
+                <p>E-mail: <a href="mailto:ariguiyusra@gmail.com">ariguiyusra@gmail.com</a></p>
+            </div>
+            <div class="footer-section collaborators">
+                <h3>Collaborateurs</h3>
+                <p>Merci au Dr. Arigui Yassine et au Dr. Ismail Ayyoub, kinésithérapeutes, pour leurs précieux conseils. Leur site web: <a href="kinechezvous.be" target="_blank">KINÉCHEZVOUS</a></p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 KineHub. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+{% endblock %}
