@@ -5,10 +5,55 @@ body{
 }
 
 header{
-    background-color: #3498db;
+    background-color: #25293d;
     color: #fff;
     text-align: center;
-    padding: 50px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-description{
+    margin-left: 10%;
+}
+
+.logo-container{
+    max-height: 200px;
+    width: auto; /* Définissez la largeur maximale du conteneur du logo */
+}
+
+.logo-container img{
+    max-height: 200px; /* Hauteur maximale du logo */
+    width: auto;
+    margin-left: 10%;
+    margin-right: 10%;
+    
+}
+
+.logo {
+    margin-right: 10%;
+    max-width: 100%; /* Le logo ne dépassera pas la largeur du conteneur */
+    height: auto; /* Maintient les proportions du logo */
+    display: block; /* Élimine l'espace supplémentaire sous l'image */
+}
+
+.btn-container {
+    display: flex;
+    margin-right: 10%;
+    margin-left: 10%;
+}
+
+.button {
+    background-color: #606999 ;
+    color: #fff;
+    padding: 10px 15px;
+    margin-left: 10px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.button:hover {
+    background-color: #474c6b ;
 }
 
 header h1 {
@@ -18,6 +63,14 @@ header h1 {
 
 header p {
     font-size: 1.2em;
+}
+
+
+.inscription {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px 0;
 }
 
 .features {
@@ -43,12 +96,12 @@ header p {
     transform: scale(1.05);
 }
 
-.inscription {
-    background-color: #3498db; /* Couleur de fond du CTA */
+/* .inscription {
+    background-color: #3498db;
     color: #fff;
     text-align: center;
     padding: 50px 0;
-}
+} */
 
 .inscription a{
     font-weight: bold;
@@ -80,7 +133,7 @@ footer {
 .footer-section h3 {
     color: #333;
     text-align: center;
-    margin-bottom: 10px;
+    margin:0;
 }
 
 .footer-bottom {

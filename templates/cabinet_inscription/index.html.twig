@@ -2,9 +2,14 @@
 
 {% extends 'base.html.twig' %}
 
-{% block title %}Inscription de votre cabinet!{% endblock %}
+{% block title %}Inscription{% endblock %}
 
 {% block body %}
+    <header>
+        <div class="logo-container">
+            <img src="{{ asset('images/1.png') }}" alt="Logo KH" class="logo">
+        </div>
+    </header>
     <h1>Inscription de votre cabinet</h1>
 
         {{ form_start(form) }}

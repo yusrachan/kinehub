@@ -28,7 +28,7 @@ form input[type="email"] {
 }
 
 form button {
-    background-color: #3498db;
+    background-color: #606999;
     color: #fff;
     padding: 12px 20px;
     font-size: 1.2em;
@@ -40,5 +40,5 @@ form button {
 }
 
 form button:hover {
-    background-color: #2980b9;
+    background-color: #474c6b;
 }

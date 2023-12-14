@@ -2,8 +2,15 @@
 
 {% block body %}
     <header>
-		<h1>KineHub</h1>
-        <p>Facilitez la gestion des dossiers médicaux de vos patients de manière intuitive et sécurisée.</p>
+        <div class="logo-container">
+            <img src="{{ asset('images/1.png') }}" alt="Logo KH" class="logo">
+        </div>
+        <p class="header-description">Facilitez la gestion des dossiers médicaux de vos patients de manière intuitive et sécurisée.</p>
+        <div class="btn-container">
+            <a href="{{ path('cabinet_inscription') }}" class="button">Inscription</a>
+            <a href="" class="button">Connexion</a>
+        </div>
+
     </header>
     <section class="features">
         <div class="feature">
@@ -15,14 +22,14 @@
             <p>La sécurité est notre priorité. Les dossiers de vos patients sont stockés de manière sécurisée et conformément aux normes de confidentialité.</p>
         </div>
         <div class="feature">
-            <h2>Gestion simplifiée</h2>
+            <h2>Collaboration facile</h2>
             <p>Permettez aux kinésithérapeutes de collaborer en partageant des informations essentielles sur les patients.</p>
         </div>
 	</section>
 
     <section class="inscription">
         <p>Vous souhaitez utiliser notre plateforme ?</p>
-        <a href="{{ path('cabinet_inscription') }}" class="btn">Inscrivez votre cabinet sur KineHub dès maintenant !</a>
+        <a href="{{ path('cabinet_inscription') }}" class="button">Inscrivez votre cabinet sur KineHub dès maintenant !</a>
     </section>
     <footer>
         <div class="footer-content">
@@ -32,7 +39,7 @@
             </div>
             <div class="footer-section collaborators">
                 <h3>Collaborateurs</h3>
-                <p>Merci au Dr. Arigui Yassine et au Dr. Ismail Ayyoub, kinésithérapeutes, pour leurs précieux conseils. Leur site web: <a href="kinechezvous.be" target="_blank">KINÉCHEZVOUS</a></p>
+                <p>Merci au Dr. Arigui Yassine et au Dr. Ismail Ayyoub, kinésithérapeutes, pour leurs précieux conseils. Leur site web: <a href="www.kinechezvous.be" target="_blank">KINÉCHEZVOUS</a></p>
             </div>
         </div>
         <div class="footer-bottom">
