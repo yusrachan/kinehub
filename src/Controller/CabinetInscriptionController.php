@@ -2,13 +2,13 @@
 
 namespace App\Controller;
 
-use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Cabinet;
 use App\Form\CabinetType;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class CabinetInscriptionController extends AbstractController
 {
@@ -20,7 +20,7 @@ class CabinetInscriptionController extends AbstractController
     }
 
     #[Route('inscription', name: 'cabinet_inscription')]
-    public function index(Request $request): Response
+    public function index(Request $request, Cabinet $cabinet): Response
     {
         $company = new Cabinet;
         $form = $this->createForm(CabinetType::class, $company);
@@ -28,6 +28,15 @@ class CabinetInscriptionController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $numBCE = $company->getNumBCE();
+            $existingCabinet = $this->entityManager->getRepository(Cabinet::class)->findOneBy(['numBCE' => $numBCE]);
+
+            if ($existingCabinet) {
+                $this->addFlash('error', 'Ce numéro BCE est déjà enregistré.');
+
+                return $this->redirectToRoute('cabinet_inscription');
+            }
+
             $this->entityManager->persist($company);
             $this->entityManager->flush();
 
@@ -42,4 +51,5 @@ class CabinetInscriptionController extends AbstractController
     public function confirmation() : Response {
         return $this->render('inscription_confirmation.html.twig');
     }
+
 }

@@ -17,14 +17,27 @@ class CabinetType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            ->add('numBCE', TextType::class,[
+                'label'=>"Votre numéro d'enregistrement BCE :",
+                'constraints' => [
+                    new Assert\Regex([
+                        'pattern' => '/^0[0-9]{9}$/',
+                        'message' => 'Le numéro BCE est composé de 10 chiffes dont le premier est 0.'
+                    ]),
+                    new Assert\Regex([
+                        'pattern' => '/^[0-9]+$/',
+                        'message' => 'Le numéro BCE ne doit contenir que des chiffres.'
+                    ]),
+                ]
+            ])
             ->add('nom', TextType::class,[
                 'label'=>"Nom de votre cabinet :",
             ])
             ->add('adresse', TextType::class,[
-                'label'=>"L'adresse de votre cabinet :",
+                'label'=>"Adresse de votre cabinet :",
             ])
             ->add('zipcode', TextType::class,[
-                'label'=>"Le code postal :",
+                'label'=>"Code postal :",
                 'constraints' => [
                     new Assert\Regex([
                         'pattern' => '/^[0-9]{4}$/',
@@ -38,19 +51,6 @@ class CabinetType extends AbstractType
             ])
             ->add('contactEmail', EmailType::class,[
                 'label'=>"Votre e-mail de contact :",
-            ])
-            ->add('numBCE', TextType::class,[
-                'label'=>"Votre numéro d'enregistrement BCE :",
-                'constraints' => [
-                    new Assert\Regex([
-                        'pattern' => '/^0[0-9]{9}$/',
-                        'message' => 'Le numéro BCE est composé de 10 chiffes dont le premier est 0.'
-                    ]),
-                    new Assert\Regex([
-                        'pattern' => '/^[0-9]+$/',
-                        'message' => 'Le numéro BCE ne doit contenir que des chiffres.'
-                    ]),
-                ]
             ])
             ->add('save', SubmitType::class, [
                 'label' => 'S\'inscrire',
