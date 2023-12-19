@@ -2,11 +2,11 @@ body{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
+    background-color: #25293d;
+    color: #fff;
 }
 
 header{
-    background-color: #25293d;
-    color: #fff;
     text-align: center;
     display: flex;
     justify-content: space-between;
@@ -65,6 +65,9 @@ header p {
     font-size: 1.2em;
 }
 
+hr{
+    color: #fff;
+}
 
 .inscription {
     display: flex;
@@ -74,6 +77,7 @@ header p {
 }
 
 .features {
+    margin-top: 2%;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -89,7 +93,7 @@ header p {
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease-in-out;
-    background-color: #fff; /* Couleur de fond des fonctionnalités */
+    background-color: #606999 ;
 }
 
 .feature:hover {
@@ -112,7 +116,7 @@ header p {
 }
 
 footer {
-    background-color: #f8f8f8;
+    background-color: #25293d;
     padding: 20px 0;
 }
 
@@ -122,6 +126,8 @@ footer {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+    color: #fff;
+    text-decoration: none;
 }
 
 .footer-section {
@@ -130,10 +136,17 @@ footer {
     margin-bottom: 20px;
 }
 
+
 .footer-section h3 {
-    color: #333;
+    color: #fff;
     text-align: center;
     margin:0;
+}
+
+
+.footer-section a{
+    font-weight: bold;
+    color: #fff;
 }
 
 .footer-bottom {

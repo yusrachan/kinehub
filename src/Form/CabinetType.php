@@ -18,7 +18,7 @@ class CabinetType extends AbstractType
     {
         $builder
             ->add('numBCE', TextType::class,[
-                'label'=>"Votre numéro d'enregistrement BCE :",
+                'label'=>"Numéro d'enregistrement BCE :",
                 'constraints' => [
                     new Assert\Regex([
                         'pattern' => '/^0[0-9]{9}$/',
@@ -50,7 +50,7 @@ class CabinetType extends AbstractType
                 ]
             ])
             ->add('contactEmail', EmailType::class,[
-                'label'=>"Votre e-mail de contact :",
+                'label'=>"E-mail de contact :",
             ])
             ->add('save', SubmitType::class, [
                 'label' => 'S\'inscrire',

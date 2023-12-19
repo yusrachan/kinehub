@@ -20,6 +20,7 @@ form label {
 
 form input[type="text"],
 form input[type="email"] {
+    box-sizing: border-box;
     width: 100%;
     padding: 10px;
     margin-bottom: 16px;
@@ -41,4 +42,13 @@ form button {
 
 form button:hover {
     background-color: #474c6b;
+}
+
+.error-message {
+    color: red;
+    font-weight: bold;
+}
+
+form span.form-error {
+    color: red;
 }
