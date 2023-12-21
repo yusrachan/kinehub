@@ -2,6 +2,10 @@ controllers:
     resource: ../src/Controller/
     type: attribute
 
+index:
+    path: ''
+    controller: 'App\Controller\AccueilController::index'
+
 cabinet_inscription:
     path: 'inscription'
     controller: 'App\Controller\CabinetInscriptionController::index'

@@ -1,10 +1,15 @@
-{# templates/inscription_confirmation.html.html.twig #}
+{# templates/inscription_confirmation.html.twig #}
 
 {% extends 'base.html.twig' %}
 
 {% block title %}Confirmation d'inscription{% endblock %}
 
 {% block body %}
+    <header>
+        <div class="logo-container">
+            <img src="{{ asset('images/1.png') }}" alt="Logo KH" class="logo" href="{{ path('index') }}">
+        </div>
+    </header>
     <h1>Merci pour votre inscription !</h1>
     <p>Votre demande d'inscription a été reçue. Nous allons l'examiner.</p>
 {% endblock %}

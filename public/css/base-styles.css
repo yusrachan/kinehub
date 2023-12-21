@@ -1,0 +1,66 @@
+body{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #25293d;
+    color: #fff;
+}
+
+header{
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-description{
+    margin-left: 10%;
+}
+
+.logo-container{
+    max-height: 200px;
+    width: auto; /* Définissez la largeur maximale du conteneur du logo */
+}
+
+.logo-container img{
+    max-height: 200px; /* Hauteur maximale du logo */
+    width: auto;
+    margin-left: 10%;
+    margin-right: 10%;
+    
+}
+
+.logo {
+    margin-right: 10%;
+    max-width: 100%; /* Le logo ne dépassera pas la largeur du conteneur */
+    height: auto; /* Maintient les proportions du logo */
+    display: block; /* Élimine l'espace supplémentaire sous l'image */
+}
+
+.btn-container {
+    display: flex;
+    margin-right: 10%;
+    margin-left: 10%;
+}
+
+.button {
+    background-color: #606999 ;
+    color: #fff;
+    padding: 10px 15px;
+    margin-left: 10px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.button:hover {
+    background-color: #474c6b ;
+}
+
+header h1 {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+header p {
+    font-size: 1.2em;
+}

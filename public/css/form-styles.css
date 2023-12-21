@@ -9,13 +9,13 @@ form {
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    color: #333;
 }
 
 form label {
     display: block;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
     font-weight: bold;
-    color: #333;
 }
 
 form input[type="text"],
@@ -36,8 +36,6 @@ form button {
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    /* display: block;
-    margin: 0 auto; */
 }
 
 form button:hover {
@@ -47,8 +45,4 @@ form button:hover {
 .error-message {
     color: red;
     font-weight: bold;
-}
-
-form span.form-error {
-    color: red;
 }

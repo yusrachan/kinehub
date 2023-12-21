@@ -4,14 +4,16 @@ namespace App\Controller;
 
 use App\Entity\Cabinet;
 use App\Form\CabinetType;
+use Symfony\Component\Mime\Email;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Message\RegistrationNotification;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Mime\Email;
 
 class CabinetInscriptionController extends AbstractController
 {
@@ -38,43 +40,48 @@ class CabinetInscriptionController extends AbstractController
 
             if ($existingCabinet) {
                 $this->addFlash('error', 'Ce numéro BCE est déjà enregistré.');
+            } else {
+                $this->entityManager->persist($cabinet);
+                $this->entityManager->flush();
 
-                return $this->redirectToRoute('cabinet_inscription');
+                $session = new Session();
+                $session->set('cabinetData', $cabinet);
+
+                return $this->redirectToRoute('inscription_confirmation');
             }
-
-            $this->entityManager->persist($cabinet);
-            $this->entityManager->flush();
-
-            $this->sendEmails($cabinet);
-
-            return $this->redirectToRoute('inscription_confirmation');
         }
         return $this->render('cabinet_inscription/index.html.twig', [
             'form' => $form->createView(),
         ]);
     }
 
-    private function sendEmails(Cabinet $cabinet) {
+    private function sendEmails(MailerInterface $mailer, $cabinet)
+    {
         $emailAdmin = (new Email())
             ->from('y.arigui99@gmail.com')
             ->to('ariguiyusra@gmail.com')
-            ->subject('Nouvelle inscription d\'un cabinet')
-            ->text('Un nouveau cabinet s\'est inscrit. Numéro BCE: '.$cabinet->getNumBCE());
-        
-        $this->mailer->send($emailAdmin);
+            ->subject('Nouvelle demande d\'un cabinet')
+            ->text('Un nouveau cabinet s\'est inscrit. Numéro BCE: ' . $cabinet->getNumBCE() . ' et son e-mail : ' . $cabinet->getContactEmail());
 
-        $emaiUser = (new Email())
+        $mailer->send($emailAdmin);
+
+        $emailUser = (new Email())
             ->from('y.arigui99@gmail.com')
             ->to($cabinet->getContactEmail())
             ->subject('Votre demande d\'inscription a été envoyé')
             ->text('Votre inscription est en attente de validation.');
-        
-        $this->mailer->send($emaiUser);
+
+        $mailer->send($emailUser);
     }
 
     #[Route('inscription-confirmation', name: 'inscription_confirmation')]
-    public function confirmation() : Response {
+    public function confirmation(SessionInterface $session): Response
+    {
+        $cabinet = $session->get('cabinetData');
+
+        if ($cabinet) {
+            $this->sendEmails($this->mailer, $cabinet);
+        }
         return $this->render('inscription_confirmation.html.twig');
     }
-
 }

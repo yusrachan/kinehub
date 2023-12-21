@@ -31,10 +31,10 @@ class CabinetType extends AbstractType
                 ]
             ])
             ->add('nom', TextType::class,[
-                'label'=>"Nom de votre cabinet :",
+                'label'=>"Nom :",
             ])
             ->add('adresse', TextType::class,[
-                'label'=>"Adresse de votre cabinet :",
+                'label'=>"Adresse :",
             ])
             ->add('zipcode', TextType::class,[
                 'label'=>"Code postal :",
@@ -58,7 +58,6 @@ class CabinetType extends AbstractType
                     'class' => 'save-btn'
                 ],                
             ]);
-        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
