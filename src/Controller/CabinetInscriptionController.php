@@ -57,20 +57,54 @@ class CabinetInscriptionController extends AbstractController
 
     private function sendEmails(MailerInterface $mailer, $cabinet)
     {
+        $message = "Un nouveau cabinet s'est inscrit.\n";
+        $message .= "Numéro BCE: " . $cabinet->getNumBCE() . "\n";
+        $message .= "Nom: " . $cabinet->getNom() . "\n";
+        $message .= "Adresse: " . $cabinet->getAdresse() . "\n";
+        $message .= "Code postal : " . $cabinet->getZipcode() . "\n";
+        $message .= "E-mail : " . $cabinet->getContactEmail() . "\n";
+
         $emailAdmin = (new Email())
-            ->from('y.arigui99@gmail.com')
+            ->from('KineHub <y.arigui99@gmail.com>')
             ->to('ariguiyusra@gmail.com')
             ->subject('Nouvelle demande d\'un cabinet')
-            ->text('Un nouveau cabinet s\'est inscrit. Numéro BCE: ' . $cabinet->getNumBCE() . ' et son e-mail : ' . $cabinet->getContactEmail());
+            ->text($message);
 
         $mailer->send($emailAdmin);
 
         $emailUser = (new Email())
-            ->from('y.arigui99@gmail.com')
+            ->from('KineHub <y.arigui99@gmail.com>')
             ->to($cabinet->getContactEmail())
             ->subject('Votre demande d\'inscription a été envoyé')
-            ->text('Votre inscription est en attente de validation.');
-
+            ->html('
+                    <html>
+                        <head>
+                            <style>
+                                body { font-family: Segoe UI, Tahoma, Geneva, Verdana, sans-serif;
+                                    margin: 0;
+                                    padding: 0;
+                                    background-color: #25293d;
+                                    color: #fff;
+                                }
+                                .header img {
+                                    display: block;
+                                    max-height: 200px;
+                                    width: auto;
+                                    margin-left: 10%;
+                                    margin-right: 10%;
+                                }
+                                .content { margin: 15px; }
+                            </style>
+                        </head>
+                        <body>
+                            <div class="header">
+                            <img src="/public/images/1.png" alt="Logo KineHub" /></div>
+                            <div class="content">
+                                <h2>Bonjour ' . htmlspecialchars($cabinet->getNom()) . ',</h2><br>
+                                <p>Merci, pour votre demande d\'inscription ! Elle sera traitée dans les plus brefs délais.</p>
+                            </div>
+                        </body>
+                    </html>');
         $mailer->send($emailUser);
     }
 
@@ -83,5 +117,18 @@ class CabinetInscriptionController extends AbstractController
             $this->sendEmails($this->mailer, $cabinet);
         }
         return $this->render('inscription_confirmation.html.twig');
+    }
+
+    #[Route('', name:'')]
+    public function verifierCabinet(Cabinet $cabinet) {
+        if ($this->estConforme($cabinet)) {
+            $this->envoyerEmailConfirmation($cabinet);
+        }
+    }
+
+    private function estConforme(Cabinet $cabinet) {
+    }
+    
+    private function envoyerEmailConfirmation(Cabinet $cabinet) {
     }
 }

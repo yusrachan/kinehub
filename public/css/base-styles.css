@@ -19,11 +19,11 @@ header{
 
 .logo-container{
     max-height: 200px;
-    width: auto; /* Définissez la largeur maximale du conteneur du logo */
+    width: auto;
 }
 
 .logo-container img{
-    max-height: 200px; /* Hauteur maximale du logo */
+    max-height: 200px;
     width: auto;
     margin-left: 10%;
     margin-right: 10%;
@@ -32,9 +32,9 @@ header{
 
 .logo {
     margin-right: 10%;
-    max-width: 100%; /* Le logo ne dépassera pas la largeur du conteneur */
-    height: auto; /* Maintient les proportions du logo */
-    display: block; /* Élimine l'espace supplémentaire sous l'image */
+    max-width: 100%;
+    height: auto;
+    display: block;
 }
 
 .btn-container {
