@@ -50,7 +50,7 @@ class CabinetInscriptionController extends AbstractController
                 return $this->redirectToRoute('inscription_confirmation');
             }
         }
-        return $this->render('cabinet_inscription/index.html.twig', [
+        return $this->render('cabinet_inscription/cabinet_inscription.html.twig', [
             'form' => $form->createView(),
         ]);
     }
