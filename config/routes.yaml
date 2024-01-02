@@ -9,3 +9,11 @@ index:
 cabinet_inscription:
     path: 'inscription'
     controller: 'App\Controller\CabinetInscriptionController::index'
+
+admin_inscriptions:
+    path: 'admin/demande-inscription'
+    controller: 'App\Controller\AdminInscriptionController::index'
+
+app_login:
+    path: 'connexion'
+    controller: App\Controller\SecurityController::login

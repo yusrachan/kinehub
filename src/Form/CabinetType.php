@@ -14,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class CabinetType extends AbstractType
 {
+    //php bin/console messenger:consume async
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder

@@ -1,0 +1,37 @@
+{# templates/admin/demande_inscriptions.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Administration des Inscriptions{% endblock %}
+
+{% block body %}
+    <h1>Administration des Inscriptions</h1>
+    <div class="container-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Numéro BCE</th>
+                    <th>Nom</th>
+                    <th>Adresse</th>
+                    <th>Code Postal</th>
+                    <th>Email de Contact</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for inscription in inscriptions %}
+                    <tr>
+                        <td>{{ inscription.numBCE }}</td>
+                        <td>{{ inscription.nom }}</td>
+                        <td>{{ inscription.adresse }}</td>
+                        <td>{{ inscription.zipcode }}</td>
+                        <td>{{ inscription.contactEmail }}</td>
+                        <td>
+                            {# <a href="{{ path('', {'id': inscription.id}) }}">Valider</a>
+                            <a href="{{ path('', {'id': inscription.id}) }}">Refuser</a> #}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

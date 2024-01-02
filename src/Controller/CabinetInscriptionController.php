@@ -118,17 +118,4 @@ class CabinetInscriptionController extends AbstractController
         }
         return $this->render('inscription_confirmation.html.twig');
     }
-
-    #[Route('', name:'')]
-    public function verifierCabinet(Cabinet $cabinet) {
-        if ($this->estConforme($cabinet)) {
-            $this->envoyerEmailConfirmation($cabinet);
-        }
-    }
-
-    private function estConforme(Cabinet $cabinet) {
-    }
-    
-    private function envoyerEmailConfirmation(Cabinet $cabinet) {
-    }
 }
