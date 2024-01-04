@@ -2,18 +2,19 @@
 
 namespace App\Message;
 
-use App\Entity\Cabinet;
+use App\Entity\CabinetEnAttente;
+
 
 class RegistrationNotification{
 
     private $cabinet;
 
-    public function __construct(Cabinet $cabinet)
+    public function __construct(CabinetEnAttente $cabinet)
     {
         $this->cabinet = $cabinet;
     }
 
-    public function getCabinet(): Cabinet
+    public function getCabinet(): CabinetEnAttente
     {
         return $this->cabinet;
     }

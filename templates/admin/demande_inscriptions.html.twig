@@ -2,10 +2,10 @@
 
 {% extends 'base.html.twig' %}
 
-{% block title %}Administration des Inscriptions{% endblock %}
+{% block title %}Administration des demandes d'inscriptions{% endblock %}
 
 {% block body %}
-    <h1>Administration des Inscriptions</h1>
+    <h1>Administration des demandes d'inscriptions</h1>
     <div class="container-table">
         <table>
             <thead>
@@ -14,7 +14,8 @@
                     <th>Nom</th>
                     <th>Adresse</th>
                     <th>Code Postal</th>
-                    <th>Email de Contact</th>
+                    <th>E-mail de contact</th>
+                    <th>Acceptation</th>
                 </tr>
             </thead>
             <tbody>
@@ -25,9 +26,9 @@
                         <td>{{ inscription.adresse }}</td>
                         <td>{{ inscription.zipcode }}</td>
                         <td>{{ inscription.contactEmail }}</td>
-                        <td>
-                            {# <a href="{{ path('', {'id': inscription.id}) }}">Valider</a>
-                            <a href="{{ path('', {'id': inscription.id}) }}">Refuser</a> #}
+                        <td class="table-actions">
+                            <a href="{{ path('valider_inscription', {'id':inscription.id}) }}" class="btn">Valider</a>
+                            <a href="{{ path('refuser_inscription', {'id': inscription.id}) }}" class="btn">Refuser</a>
                         </td>
                     </tr>
                 {% endfor %}

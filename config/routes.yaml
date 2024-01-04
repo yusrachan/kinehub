@@ -11,9 +11,21 @@ cabinet_inscription:
     controller: 'App\Controller\CabinetInscriptionController::index'
 
 admin_inscriptions:
-    path: 'admin/demande-inscription'
+    path: 'demande-inscription'
     controller: 'App\Controller\AdminInscriptionController::index'
+
+valider_inscription:
+    path: 'admin/valider_inscription'
+    controller: 'App\Controller\AdminInscriptionController::validerInscription'
+
+refuser_inscription:
+    path: 'admin/refuser_inscription/{id}'
+    controller: 'App\Controller\AdminInscriptionController::refuserInscription'
 
 app_login:
     path: 'connexion'
+    controller: App\Controller\SecurityController::index
+
+appp_loginn:
+    path: 'connection'
     controller: App\Controller\SecurityController::login

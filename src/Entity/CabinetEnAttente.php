@@ -2,11 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\CabinetRepository;
+use App\Repository\CabinetEnAttenteRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: CabinetRepository::class)]
-class Cabinet
+#[ORM\Entity(repositoryClass: CabinetEnAttenteRepository::class)]
+class CabinetEnAttente
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]

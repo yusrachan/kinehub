@@ -2,27 +2,27 @@
 
 namespace App\Repository;
 
-use App\Entity\Cabinet;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use App\Entity\CabinetEnAttente;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
- * @extends ServiceEntityRepository<Cabinet>
+ * @extends ServiceEntityRepository<CabinetEnAttente>
  *
- * @method Cabinet|null find($id, $lockMode = null, $lockVersion = null)
- * @method Cabinet|null findOneBy(array $criteria, array $orderBy = null)
- * @method Cabinet[]    findAll()
- * @method Cabinet[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method CabinetEnAttente|null find($id, $lockMode = null, $lockVersion = null)
+ * @method CabinetEnAttente|null findOneBy(array $criteria, array $orderBy = null)
+ * @method CabinetEnAttente[]    findAll()
+ * @method CabinetEnAttente[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class CabinetRepository extends ServiceEntityRepository
+class CabinetEnAttenteRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Cabinet::class);
+        parent::__construct($registry, CabinetEnAttente::class);
     }
 
 //    /**
-//     * @return Cabinet[] Returns an array of Cabinet objects
+//     * @return CabinetEnAttente[] Returns an array of CabinetEnAttente objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -36,7 +36,7 @@ class CabinetRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Cabinet
+//    public function findOneBySomeField($value): ?CabinetEnAttente
 //    {
 //        return $this->createQueryBuilder('c')
 //            ->andWhere('c.exampleField = :val')

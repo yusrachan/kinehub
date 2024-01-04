@@ -1,6 +1,7 @@
 table {
     width: 90%;
     margin: 0 auto;
+    border-collapse: collapse;
 }
 
 .container-table {
@@ -9,11 +10,21 @@ table {
 
 th, td {
     padding: 8px;
-    text-align: left;
+    text-align: center;
     border-bottom: 1px solid #ddd;
+    border-right: 1px solid #ddd;
 }
 
-th {
+th, tr:nth-child(even) {
     background-color: #f2f2f2;
     color: #333;
+}
+
+td:first-child {
+    border-left: 1px solid #ddd;
+}
+
+.table-actions a {
+    font-weight: bold;
+    color: rgb(0, 183, 255);
 }

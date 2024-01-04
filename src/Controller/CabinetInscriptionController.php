@@ -2,8 +2,8 @@
 
 namespace App\Controller;
 
-use App\Entity\Cabinet;
 use App\Form\CabinetType;
+use App\Entity\CabinetEnAttente;
 use Symfony\Component\Mime\Email;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Message\RegistrationNotification;
@@ -29,14 +29,14 @@ class CabinetInscriptionController extends AbstractController
     #[Route('inscription', name: 'cabinet_inscription')]
     public function index(Request $request): Response
     {
-        $cabinet = new Cabinet;
+        $cabinet = new CabinetEnAttente;
         $form = $this->createForm(CabinetType::class, $cabinet);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $numBCE = $cabinet->getNumBCE();
-            $existingCabinet = $this->entityManager->getRepository(Cabinet::class)->findOneBy(['numBCE' => $numBCE]);
+            $existingCabinet = $this->entityManager->getRepository(CabinetEnAttente::class)->findOneBy(['numBCE' => $numBCE]);
 
             if ($existingCabinet) {
                 $this->addFlash('error', 'Ce numéro BCE est déjà enregistré.');
