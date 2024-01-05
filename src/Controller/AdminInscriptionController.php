@@ -9,6 +9,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AdminInscriptionController extends AbstractController
@@ -73,13 +74,21 @@ class AdminInscriptionController extends AbstractController
         $cabinetValide->setNom($cabinetEnAttente->getAdresse());
         $cabinetValide->setNom($cabinetEnAttente->getZipcode());
         $cabinetValide->setNom($cabinetEnAttente->getContactEmail());
+
         $cabinetValide->setNom($cabinetEnAttente->getNumBCE());
-
         $entityManager->persist($cabinetValide);
-
         $entityManager->remove($cabinetEnAttente);
-
         $entityManager->flush();
+
+        $urlPaiement = $this->generateUrl('route_paiement', [], UrlGeneratorInterface::ABSOLUTE_URL);
+
+        $email = (new Email())
+            ->from('KineHub <y.arigui99@gmail.com>')
+            ->to($cabinetValide->getContactEmail())
+            ->subject('Validation de votre inscription à KineHub')
+            ->html("Merci de vous être inscrit à KineHub !
+            Pour finaliser votre inscription et commencer à utiliser la plateforme, veuillez procéder au paiement en cliquant sur ce lien : <a href='{$urlPaiement}'>Payer mon abonnement</a>.");
+        $mailer->send($email);
 
         return $this->redirectToRoute('admin_inscriptions');
     }
