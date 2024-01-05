@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\CabinetValide;
 use App\Entity\CabinetEnAttente;
 use Symfony\Component\Mime\Email;
 use Doctrine\ORM\EntityManagerInterface;
@@ -29,17 +30,6 @@ class AdminInscriptionController extends AbstractController
         return $this->render('admin/demande_inscriptions.html.twig', ['inscriptions' => $inscriptions]);
     }
 
-    #[Route('admin/valider-inscription', name: 'valider_inscription')]
-    public function validerInscription($cabinet, MailerInterface $mailer)
-    {
-        $email = (new Email())
-            ->from('KineHub <y.arigui99@gmail.com>')
-            ->to($cabinet->getContactEmail())
-            ->subject('Confirmation d\'inscription')
-            ->text('Votre inscription à notre plateforme a été validée.');
-        $mailer->send($email);
-    }
-
     #[Route('admin/refuser-inscription/{id}', name: 'refuser_inscription')]
     public function refuserInscription($id, MailerInterface $mailer, EntityManagerInterface $entityManager)
     {
@@ -64,6 +54,31 @@ class AdminInscriptionController extends AbstractController
         $mailer->send($email);
 
         $entityManager->remove($cabinet);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('admin_inscriptions');
+    }
+
+    #[Route('admin/valider-inscription/{id}', name: 'valider_inscription')]
+    public function validerInscription($id, EntityManagerInterface $entityManager, MailerInterface $mailer): Response
+    {
+        $cabinetEnAttente = $entityManager->getRepository(CabinetEnAttente::class)->find($id);
+
+        if (!$cabinetEnAttente) {
+            throw $this->createNotFoundException('Inscription introuvable.');
+        }
+
+        $cabinetValide = new CabinetValide();
+        $cabinetValide->setNom($cabinetEnAttente->getNom());
+        $cabinetValide->setNom($cabinetEnAttente->getAdresse());
+        $cabinetValide->setNom($cabinetEnAttente->getZipcode());
+        $cabinetValide->setNom($cabinetEnAttente->getContactEmail());
+        $cabinetValide->setNom($cabinetEnAttente->getNumBCE());
+
+        $entityManager->persist($cabinetValide);
+
+        $entityManager->remove($cabinetEnAttente);
+
         $entityManager->flush();
 
         return $this->redirectToRoute('admin_inscriptions');

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "577cb45df48de51c53a0fea582fa070d",
+    "content-hash": "e8f5270fc0c3811fb3dabef337fc35b3",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -2493,16 +2493,16 @@
         },
         {
             "name": "stripe/stripe-php",
-            "version": "v13.6.0",
+            "version": "v13.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/stripe/stripe-php.git",
-                "reference": "6863bd70637fa1e2c022eceec44b89b7687634a1"
+                "reference": "577d64a3fdc92ba2915263299a69136a2813f4a3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/stripe/stripe-php/zipball/6863bd70637fa1e2c022eceec44b89b7687634a1",
-                "reference": "6863bd70637fa1e2c022eceec44b89b7687634a1",
+                "url": "https://api.github.com/repos/stripe/stripe-php/zipball/577d64a3fdc92ba2915263299a69136a2813f4a3",
+                "reference": "577d64a3fdc92ba2915263299a69136a2813f4a3",
                 "shasum": ""
             },
             "require": {
@@ -2546,9 +2546,9 @@
             ],
             "support": {
                 "issues": "https://github.com/stripe/stripe-php/issues",
-                "source": "https://github.com/stripe/stripe-php/tree/v13.6.0"
+                "source": "https://github.com/stripe/stripe-php/tree/v13.8.0"
             },
-            "time": "2023-12-07T21:13:50+00:00"
+            "time": "2024-01-04T19:52:48+00:00"
         },
         {
             "name": "symfony/asset",

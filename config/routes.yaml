@@ -29,3 +29,7 @@ app_login:
 appp_loginn:
     path: 'connection'
     controller: App\Controller\SecurityController::login
+
+route_paiement:
+    path: /paiement
+    controller: App\Controller\PaiementController::index
