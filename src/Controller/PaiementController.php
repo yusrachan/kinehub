@@ -11,7 +11,9 @@ class PaiementController extends AbstractController
     #[Route('/paiement', name: 'app_paiement')]
     public function index(): Response
     {
-        \Stripe\Stripe::setApiKey('pk_live_51OVEizFtm1LR4NNUF7eHQTFxXtch480Cb59fC6tXHSU8ubDAjwJ1fsvemnRKyS30uP6HxmHSOWbIoeRynyzSQIkq00YmqN3zxX');
+        $stripe = new \Stripe\StripeClient("pk_test_51OVEizFtm1LR4NNUUYrk14m7u5H4CD0hWupAnMntf3NdEaZ6871TZRSa3Yo1YRrYGxLoIRlBIHP7Pd2Xs1WLs2px000xs4YUHL");
+
+        $product = 
 
         $session = \Stripe\Checkout\Session::create([
             'payment_method_types' => ['card'],
@@ -19,7 +21,7 @@ class PaiementController extends AbstractController
                 'price_data' => [
                     'currency' => 'eur',
                     'product_data' => [
-                        'name' => 'Nom du produit ou service',
+                        'name' => 'Abonnement à KineHub',
                     ],
                     'unit_amount' => 100, // Montant en centimes
                 ],

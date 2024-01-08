@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Entity\CabinetValide;
 use App\Entity\CabinetEnAttente;
 use Symfony\Component\Mime\Email;
@@ -11,16 +12,20 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AdminInscriptionController extends AbstractController
 {
 
     private $entityManager;
     private $mailer;
+    private $passwordHasher;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher, MailerInterface $mailer)
     {
         $this->entityManager = $entityManager;
+        $this->passwordHasher = $passwordHasher;
+        $this->mailer = $mailer;
     }
 
     #[Route('admin/demande-inscription', name: 'admin_inscriptions')]
@@ -30,6 +35,7 @@ class AdminInscriptionController extends AbstractController
 
         return $this->render('admin/demande_inscriptions.html.twig', ['inscriptions' => $inscriptions]);
     }
+    
 
     #[Route('admin/refuser-inscription/{id}', name: 'refuser_inscription')]
     public function refuserInscription($id, MailerInterface $mailer, EntityManagerInterface $entityManager)
@@ -69,17 +75,31 @@ class AdminInscriptionController extends AbstractController
             throw $this->createNotFoundException('Inscription introuvable.');
         }
 
+        
         $cabinetValide = new CabinetValide();
         $cabinetValide->setNom($cabinetEnAttente->getNom());
-        $cabinetValide->setNom($cabinetEnAttente->getAdresse());
-        $cabinetValide->setNom($cabinetEnAttente->getZipcode());
-        $cabinetValide->setNom($cabinetEnAttente->getContactEmail());
-
-        $cabinetValide->setNom($cabinetEnAttente->getNumBCE());
+        $cabinetValide->setAdresse($cabinetEnAttente->getAdresse());
+        $cabinetValide->setZipcode($cabinetEnAttente->getZipcode());
+        $cabinetValide->setContactEmail($cabinetEnAttente->getContactEmail());
+        $cabinetValide->setNumBCE($cabinetEnAttente->getNumBCE());
+        
         $entityManager->persist($cabinetValide);
         $entityManager->remove($cabinetEnAttente);
         $entityManager->flush();
+        
+        $password = bin2hex(random_bytes(4));
+        $user = new User();
+        
+        $user->setEmail($cabinetValide->getContactEmail());
+        $hashedPassword = $this->passwordHasher->hashPassword($user, $password);
+        $user->setPassword($hashedPassword);
+        $user->setRoles(["ROLE_USER"]);
+        $user->setCabinet($cabinetValide);
 
+        $entityManager->persist($user);
+        $entityManager->flush();
+
+        
         $urlPaiement = $this->generateUrl('route_paiement', [], UrlGeneratorInterface::ABSOLUTE_URL);
 
         $email = (new Email())
@@ -87,7 +107,12 @@ class AdminInscriptionController extends AbstractController
             ->to($cabinetValide->getContactEmail())
             ->subject('Validation de votre inscription à KineHub')
             ->html("Merci de vous être inscrit à KineHub !
-            Pour finaliser votre inscription et commencer à utiliser la plateforme, veuillez procéder au paiement en cliquant sur ce lien : <a href='{$urlPaiement}'>Payer mon abonnement</a>.");
+            Voici vos identifiants personnels afin d'accéder à la plateforme :
+
+            Nom d\'utilisateur : {$user->getEmail()}
+            Mot de passe : $password
+            
+            Pour finaliser votre inscription et commencer à utiliser la plateforme, vous allez devoir procéder au paiement après vous être connecter.");
         $mailer->send($email);
 
         return $this->redirectToRoute('admin_inscriptions');
