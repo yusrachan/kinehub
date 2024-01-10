@@ -15,7 +15,7 @@ admin_inscriptions:
     controller: 'App\Controller\AdminInscriptionController::index'
 
 valider_inscription:
-    path: 'admin/valider_inscription'
+    path: 'admin/valider_inscription/{id}'
     controller: 'App\Controller\AdminInscriptionController::validerInscription'
 
 refuser_inscription:
@@ -32,4 +32,12 @@ appp_loginn:
 
 route_paiement:
     path: /paiement
+    controller: App\Controller\PaiementController::index
+
+route_success:
+    path: /paiement/succes
+    controller: App\Controller\PaiementController::index
+
+route_cancel:
+    path: /paiement/annulation
     controller: App\Controller\PaiementController::index

@@ -90,29 +90,35 @@ class AdminInscriptionController extends AbstractController
         $password = bin2hex(random_bytes(4));
         $user = new User();
         
+        $user->setCabinet($cabinetValide);
         $user->setEmail($cabinetValide->getContactEmail());
+        $user->setRoles(["ROLE_USER"]);
         $hashedPassword = $this->passwordHasher->hashPassword($user, $password);
         $user->setPassword($hashedPassword);
-        $user->setRoles(["ROLE_USER"]);
-        $user->setCabinet($cabinetValide);
+        $user->setNom($cabinetValide->getNom());
+        $user->setHasPaid(false);
 
         $entityManager->persist($user);
         $entityManager->flush();
 
         
-        $urlPaiement = $this->generateUrl('route_paiement', [], UrlGeneratorInterface::ABSOLUTE_URL);
+        $urlConnexion = $this->generateUrl('app_login', [], UrlGeneratorInterface::ABSOLUTE_URL);
 
         $email = (new Email())
             ->from('KineHub <y.arigui99@gmail.com>')
-            ->to($cabinetValide->getContactEmail())
+            ->to($user->getEmail())
             ->subject('Validation de votre inscription à KineHub')
-            ->html("Merci de vous être inscrit à KineHub !
-            Voici vos identifiants personnels afin d'accéder à la plateforme :
+            ->html("Merci de vous être inscrit à KineHub !<br><br>
 
-            Nom d\'utilisateur : {$user->getEmail()}
+            Voici vos identifiants personnels afin d'accéder à la plateforme : <br>
+
+            Nom d'utilisateur : {$user->getEmail()}
             Mot de passe : $password
+            <br><br>
+            Pour finaliser votre inscription et commencer à utiliser la plateforme, vous allez devoir procéder au paiement après vous être connecté <a href='{$urlConnexion}'>ici</a>.
             
-            Pour finaliser votre inscription et commencer à utiliser la plateforme, vous allez devoir procéder au paiement après vous être connecter.");
+            Cordialement,
+            KineHub");
         $mailer->send($email);
 
         return $this->redirectToRoute('admin_inscriptions');

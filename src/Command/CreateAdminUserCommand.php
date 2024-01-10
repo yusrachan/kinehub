@@ -33,9 +33,6 @@ class CreateAdminUserCommand extends Command
         $this
             ->addArgument('email', InputArgument::REQUIRED, 'L\'email de l\'administrateur')
             ->addArgument('nom', InputArgument::REQUIRED, 'Le nom de l\'administrateur')
-            ->addArgument('prenom', InputArgument::REQUIRED, 'Le prénom de l\'administrateur')
-            ->addArgument('dateNaissance', InputArgument::REQUIRED, 'La date de naissance de l\'administrateur')
-            ->addArgument('adresse', InputArgument::REQUIRED, 'L\'adresse de l\'administrateur')
             ->setDescription('Crée un nouvel utilisateur administrateur.');
     }
 
@@ -44,9 +41,6 @@ class CreateAdminUserCommand extends Command
 
         $email = $input->getArgument('email');
         $nom = $input->getArgument('nom');
-        $prenom = $input->getArgument('prenom');
-        $dateNaissance = $input->getArgument('dateNaissance');
-        $adresse = $input->getArgument('adresse');
 
         $existingUser = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $email]);
 
@@ -58,9 +52,6 @@ class CreateAdminUserCommand extends Command
         $user = new User();
         $user->setEmail($email);
         $user->setNom($nom);
-        $user->setPrenom($prenom);
-        $user->setDateNaissance(new \DateTime($dateNaissance));
-        $user->setAdresse($adresse);
         $user->setRoles(['ROLE_ADMIN']);
         $user->setPassword($this->passwordHasher->hashPassword($user, 'unmdpfort'));
 

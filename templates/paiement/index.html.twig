@@ -1,20 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello PaiementController!{% endblock %}
+{% block title %}Paiement de votre abonnement{% endblock %}
 
 {% block body %}
 <style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    .stripe-table {
+        max-width: 600px;
+        margin: 0 auto;
+        border: 1px solid #ccc;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
 </style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/y.arigui/Documents/kinehub/src/Controller/PaiementController.php'|file_link(0) }}">src/Controller/PaiementController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/y.arigui/Documents/kinehub/templates/paiement/index.html.twig'|file_link(0) }}">templates/paiement/index.html.twig</a></code></li>
-    </ul>
-</div>
+    <script async src="https://js.stripe.com/v3/pricing-table.js"></script>
+    <stripe-pricing-table class="stripe-table" pricing-table-id="prctbl_1OX1POFtm1LR4NNUPvEZlyX0"
+    publishable-key="pk_test_51OVEizFtm1LR4NNUUYrk14m7u5H4CD0hWupAnMntf3NdEaZ6871TZRSa3Yo1YRrYGxLoIRlBIHP7Pd2Xs1WLs2px000xs4YUHL">
+    </stripe-pricing-table>
 {% endblock %}

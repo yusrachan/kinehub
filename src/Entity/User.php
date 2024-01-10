@@ -31,17 +31,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $nom = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $prenom = null;
-
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $dateNaissance = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $adresse = null;
-
     #[ORM\ManyToOne(inversedBy: 'users')]
     private ?CabinetValide $cabinet = null;
+
+    #[ORM\Column]
+    private bool $hasPaid = true;
 
     public function getId(): ?int
     {
@@ -125,42 +119,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getPrenom(): ?string
-    {
-        return $this->prenom;
-    }
-
-    public function setPrenom(string $prenom): static
-    {
-        $this->prenom = $prenom;
-
-        return $this;
-    }
-
-    public function getDateNaissance(): ?\DateTimeInterface
-    {
-        return $this->dateNaissance;
-    }
-
-    public function setDateNaissance(\DateTimeInterface $dateNaissance): static
-    {
-        $this->dateNaissance = $dateNaissance;
-
-        return $this;
-    }
-
-    public function getAdresse(): ?string
-    {
-        return $this->adresse;
-    }
-
-    public function setAdresse(string $adresse): static
-    {
-        $this->adresse = $adresse;
-
-        return $this;
-    }
-
     public function getCabinet(): ?CabinetValide
     {
         return $this->cabinet;
@@ -169,6 +127,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setCabinet(?CabinetValide $cabinet): static
     {
         $this->cabinet = $cabinet;
+
+        return $this;
+    }
+
+    public function isHasPaid(): bool
+    {
+        return $this->hasPaid;
+    }
+
+    public function setHasPaid(bool $hasPaid): static
+    {
+        $this->hasPaid = $hasPaid;
 
         return $this;
     }
